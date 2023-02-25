@@ -5,11 +5,11 @@ if [ -z "$LFS" ]; then
    exit 1
 fi
 
-sudo umount -r -q -d "$LFS"
+umount -r -q -d "$LFS"
 
 # detach loop back device
 for dev in $(losetup -j "$DISK_IMG" -O NAME| tail -n +2); do
-    sudo losetup -d "$(echo "$dev" | awk '{print $1}')"
+    losetup -d "$(echo "$dev" | awk '{print $1}')"
 done
 
 # remove disk image and mount points
