@@ -1,11 +1,14 @@
 #!/bin/bash
-#
-export LFS=./mnt/lfs
+
+if [ -z "$LFS" ]; then
+   echo "Need to run ./env.sh" > /dev/stderr
+   exit 1
+fi
 
 sudo umount -r -q -d "$LFS"
 
 # detach loop back device
-for dev in $(losetup -j ./build/disk.img -O NAME| tail -n +2); do
+for dev in $(losetup -j "$DISK_IMG" -O NAME| tail -n +2); do
     sudo losetup -d "$(echo "$dev" | awk '{print $1}')"
 done
 
