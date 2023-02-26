@@ -13,4 +13,4 @@ for dev in $(losetup -j "$DISK_IMG" -O NAME| tail -n +2); do
 done
 
 # remove disk image and mount points
-rm -rf build mnt
+rm -rf build/disk.img

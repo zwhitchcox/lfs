@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ -z "$LFS" ]; then
+   echo "Need to run ./env.sh" > /dev/stderr
+   exit 1
+fi
+
 set -e
  ## https://www.linuxfromscratch.org/lfs/view/stable/chapter02/creatingpartition.html
 
@@ -26,7 +31,7 @@ set -e
  mkfs.ext4 -L lfs "$dev_name"p2
 
  # create mount point for lfs
- mkdir -p $LFS
+ mkdir -p "$LFS"
 
  # mount lfs partition
  mount "$dev_name"p2 "$LFS"
@@ -45,27 +50,10 @@ set -e
    md5sum -c md5sums
  popd
 
- # create directory hierarchy
- mkdir -p "$LFS/"{etc,var} "$LFS/usr/"{bin,lib,sbin}
-
- for i in bin lib sbin; do
-   ln -sfv "usr/$i" "$LFS/$i"
- done
-
- case "$(uname -m)" in
-   x86_64) mkdir -p "$LFS/lib64" ;;
- esac
- mkdir -p "$LFS/tools"
-
  if ! groups | grep lfs; then
     groupadd lfs
     useradd -s /bin/bash -g lfs -m -k /dev/null lfs
     passwd lfs
-
-    chown -v lfs "$LFS"/{usr{,/*},lib,var,etc,bin,sbin,tools}
-    case $(uname -m) in
-      x86_64) chown -v lfs "$LFS"/lib64 ;;
-    esac
 
    cat > /home/lfs/.bash_profile << "EOF"
 exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash
