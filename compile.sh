@@ -24,19 +24,17 @@ case $(uname -m) in
 esac
 
 
-cat > /tmp/compile-binutils.sh << "EOF"
-cd "$LFS"/sources
-tar xvJf binutils*
-cd binutils-2.39
-mkdir -v build
-cd build
-../configure --prefix=$LFS/tools \
-             --with-sysroot=$LFS \
-             --target=$LFS_TGT   \
-             --disable-nls       \
-             --enable-gprofng=no \
-             --disable-werror
-make
-make install
+lfs_script() {
+   cp  ./compile-scripts/"$1".sh /tmp/"$1".sh
+   cp  ./env.sh /tmp/env.sh
+   cat >> /tmp/env.sh  << EOF
+cd $LFS/sources
+untar_source $1
+cd $1
 EOF
-su -c "bash /tmp/compile-binutils.sh" lfs
+   su -c "source /tmp/env.sh && bash /tmp/$1.sh" lfs
+}
+
+lfs_script binutils
+lfs_script gcc
+lfs_script linux
