@@ -1,7 +1,6 @@
 #!/bin/bash
 
-set -e
-[ -n "$LFS" ] || exit 1
+set -eux
 
 # Check if the "lfs" group and user already exist
 if ! getent group lfs >/dev/null; then

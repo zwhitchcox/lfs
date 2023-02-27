@@ -1,7 +1,6 @@
 #!/bin/bash
 
-set -e
-[ -n "$LFS" ] || exit 1
+set -eux
 
 # create build directory and image
 mkdir -p "$BUILD_DIR"

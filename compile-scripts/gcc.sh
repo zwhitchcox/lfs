@@ -1,8 +1,6 @@
 #!/bin/bash
-set -e
 
-cd "$LFS"/sources || exit 1
-
+set -eux
 
 tar -xf ../mpfr-4.1.0.tar.xz
 mv -v mpfr-4.1.0 mpfr
@@ -22,10 +20,10 @@ mkdir -v build
 cd build || exit 1
 
 ../configure                  \
-    --target="$LFS_TGT"         \
-    --prefix="$LFS"/tools       \
+    --target="$LFS_TGT"       \
+    --prefix="$LFS"/tools     \
     --with-glibc-version=2.36 \
-    --with-sysroot="$LFS"       \
+    --with-sysroot="$LFS"     \
     --with-newlib             \
     --without-headers         \
     --disable-nls             \
