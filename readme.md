@@ -27,19 +27,18 @@ This will create a copy of each disk image before moving on to the next stage.
 Run an individual stage:
 
 ```
-```
 bash run.sh $NUM_STAGE
 ```
 
-Replace $NUM_STAGE with the stage number, where stage 1 is disk, stage 2 is add-sources, and so on.
+Replace `$NUM_STAGE` with the stage number, where stage 1 is disk, stage 2 is add-sources, and so on.
 
 ## Stages
 
 The stages in order are:
 
-    disk: Sets up the disk image for LFS.
-    add-sources: Downloads the source packages for the build process.
-    create-dirs: Creates the directory structure for LFS.
-    binutils: Installs the binutils package.
-    gcc: Installs the GCC compiler package.
-    linux: Installs the Linux kernel.
+* `disk`: Sets up the disk image for LFS.
+* `add-sources`: Downloads the source packages for the build process.
+* `create-dirs`: Creates the directory structure for LFS.
+* `binutils`: Installs the binutils package.
+* `gcc`: Installs the GCC compiler package.
+* `linux`: Installs the Linux kernel.
