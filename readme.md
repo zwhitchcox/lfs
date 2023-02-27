@@ -36,9 +36,14 @@ Replace `$NUM_STAGE` with the stage number, where stage 1 is disk, stage 2 is ad
 
 The stages in order are:
 
-* `disk`: Sets up the disk image for LFS.
-* `add-sources`: Downloads the source packages for the build process.
-* `create-dirs`: Creates the directory structure for LFS.
-* `binutils`: Installs the binutils package.
-* `gcc`: Installs the GCC compiler package.
-* `linux`: Installs the Linux kernel.
+1.  `disk`: Sets up the disk image for LFS.
+1.  `add-sources`: Downloads the source packages for the build process.
+1.  `create-dirs`: Creates the directory structure for LFS.
+1.  `binutils`: Installs the binutils package.
+1.  `gcc`: Installs the GCC compiler package.
+1.  `linux`: Installs the Linux kernel.
+
+
+## TODO
+
+I left off at https://www.linuxfromscratch.org/lfs/view/stable/chapter05/glibc.html
